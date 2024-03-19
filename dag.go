@@ -7,7 +7,7 @@ func Add(store KVStore, node Node, h hash.Hash) []byte {
 	// TODO 将分片写入到KVStore中，并返回Merkle Root
 	var stack []Node
 	stack = append(stack, node)
-	for {
+	for len(stack)==0 {
 		node = stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
 		// 检查节点是否为文件
@@ -32,4 +32,3 @@ func Add(store KVStore, node Node, h hash.Hash) []byte {
 	// 计算并返回 Merkle Root
 	return h.Sum(nil)
 }
-
